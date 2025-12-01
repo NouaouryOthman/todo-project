@@ -4,11 +4,15 @@ services:
     build: ./todo-api
     container_name: todo-api
     ports:
-      - "5000:5000"
+      - "8080:8080"
     depends_on:
       - db
     environment:
-      - DATABASE_URL=postgres://postgres:password@db:5432/mydb
+      - DB_URL=postgres://postgres:password@db:5432/mydb
+      - DB_PORT=5432
+      - DB_USERNAME=postgres
+      - DB_PASSWORD=postgres
+      - DB_NAME=sandbox_db
     networks:
       - app-network
 
@@ -28,8 +32,8 @@ services:
     restart: always
     environment:
       POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: password
-      POSTGRES_DB: mydb
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: sandbox_db
     ports:
       - "5432:5432"
     volumes:

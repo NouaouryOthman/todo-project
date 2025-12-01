@@ -19,12 +19,12 @@ app.use("/tasks", taskRoutes);
 app.use(notFoundHandler);
 app.use(errorHandler);
 
-const port = Number(process.env["PORT"]) || 3000;
+const port = Number(process.env["PORT"]) || 8080;
 
 AppDataSource.initialize()
   .then(() => {
     app.listen(port, () => {
-      console.log("Server running on http://localhost:3000");
+      console.log("Server running on http://localhost:8080");
     });
   })
   .catch((err) => console.error("DB connection error", err));
