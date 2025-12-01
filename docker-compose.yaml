@@ -1,9 +1,8 @@
 
-version: '3.8'
 services:
   backend:
-    build: ./backend
-    container_name: backend
+    build: ./todo-api
+    container_name: todo-api
     ports:
       - "5000:5000"
     depends_on:
@@ -14,8 +13,8 @@ services:
       - app-network
 
   frontend:
-    build: ./frontend
-    container_name: frontend
+    build: ./todo-ui
+    container_name: todo-ui
     ports:
       - "3000:3000"
     depends_on:
