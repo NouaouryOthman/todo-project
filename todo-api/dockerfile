@@ -4,9 +4,13 @@ FROM node:24-alpine
 WORKDIR /app
 
 COPY package*.json ./
+
+COPY shell.sh /shell.sh
+RUN chmod +x /shell.sh
+
 RUN npm install
 
 COPY . .
 
 EXPOSE 8080
-CMD ["npm", "run", "dev"]
+CMD ["/shell.sh", "db", "npm", "start"]
