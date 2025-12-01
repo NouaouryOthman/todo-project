@@ -1,7 +1,7 @@
 import { DataSource } from "typeorm";
 import dotenv from "dotenv";
 import { TaskEntity } from "../entities/task.entity";
-import { Migration1764580294081 } from "./migrations/1764580294081-Migration";
+import { Migration1764601566718 } from "./migrations/1764601566718-Migration";
 
 dotenv.config();
 
@@ -16,5 +16,5 @@ export const AppDataSource = new DataSource({
   synchronize: false,
   logging: false,
   entities: [TaskEntity],
-  migrations: [Migration1764580294081],
+  migrations: [Migration1764601566718],
 });
