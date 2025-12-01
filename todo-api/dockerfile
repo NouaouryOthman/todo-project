@@ -5,12 +5,9 @@ WORKDIR /app
 
 COPY package*.json ./
 
-COPY shell.sh /shell.sh
-RUN chmod +x /shell.sh
-
 RUN npm install
 
 COPY . .
 
 EXPOSE 8080
-CMD ["/shell.sh", "db", "npm", "start"]
+CMD ["npm", "run", "dev"]
