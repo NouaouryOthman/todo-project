@@ -1,0 +1,37 @@
+{
+  "name": "todo-api",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "test": "vitest",
+    "dev": "nodemon --exec ts-node src/index.ts",
+    "migration:generate": "ts-node node_modules/typeorm/cli.js migration:generate src/database/migrations/Migration --dataSource src/database/data-source.ts",
+    "migration:run": "ts-node node_modules/typeorm/cli.js migration:run --dataSource src/database/data-source.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^17.0.1",
+    "express": "^5.1.0",
+    "http-errors": "^2.0.0",
+    "pg": "^8.16.3",
+    "reflect-metadata": "^0.2.2",
+    "typeorm": "^0.3.25",
+    "yup": "^1.6.1"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.3",
+    "@types/node": "^24.0.10",
+    "@types/yup": "^0.29.14",
+    "nodemon": "^3.1.10",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.8.3",
+    "vitest": "^3.2.4"
+  }
+}
