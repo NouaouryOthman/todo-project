@@ -14,8 +14,10 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(
   cors({
-    origin: "*",
-    methods: ["GET", "OPTIONS", "POST", "PUT", "DELETE"],
+    origin: process.env["UI_URL"],
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+    credentials: true,
   })
 );
 
@@ -23,6 +25,8 @@ app.use("/tasks", taskRoutes);
 
 app.use(notFoundHandler);
 app.use(errorHandler);
+
+app.options(/'*'/, cors());
 
 const port = Number(process.env["PORT"]) || 8080;
 
