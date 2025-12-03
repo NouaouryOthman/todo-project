@@ -21,7 +21,7 @@ app.use(
   })
 );
 
-app.use("/tasks", taskRoutes);
+app.use("/api/tasks", taskRoutes);
 
 app.use(notFoundHandler);
 app.use(errorHandler);
