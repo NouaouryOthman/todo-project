@@ -3,12 +3,22 @@ import { addTask } from "../../services/task.service";
 
 export default function TaskForm({ onSubmit }) {
   const [formData, setFormData] = useState({ title: "", description: "" });
+  const [isAdding, setIsAdding] = useState(false);
 
   const handleSubmit = (event) => {
+    console.log(isAdding);
+    setIsAdding(true);
+    console.log(isAdding);
     const newTask = { ...formData };
     event.preventDefault();
 
-    addTask(newTask).then(({ data }) => onSubmit({ ...data }));
+    addTask(newTask).then(({ data }) => {
+      onSubmit({ ...data })
+      setIsAdding(false)
+    }).catch(error => {
+      console.error(`Failed to add Task: ${error}`);
+      setIsAdding(false);
+    })
   };
 
   return (
@@ -28,7 +38,7 @@ export default function TaskForm({ onSubmit }) {
           setFormData({ ...formData, description: e.target.value })
         }
       />
-      <button type="submit" className="text-green-600 text-sm">
+      <button type="submit" className="text-green-600 text-sm disabled:text-gray-500" disabled={isAdding}>
         Add Task
       </button>
     </form>
