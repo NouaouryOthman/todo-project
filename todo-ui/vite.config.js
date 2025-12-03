@@ -12,14 +12,8 @@ export default defineConfig({
   server: {
     port: 3000,
     host: true,
-    origin: "http://localhost:3000",
+    origin: import.meta.env.VITE_UI_BASE_URL,
     allowedHosts: true,
     cors: true,
-    proxy: {
-      "/api": {
-        target: import.meta.env.VITE_API_BASE_URL,
-        changeOrigin: true,
-      },
-    },
   },
 });
