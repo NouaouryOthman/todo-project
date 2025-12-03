@@ -12,7 +12,8 @@ export default defineConfig({
   server: {
     port: 3000,
     host: true,
-    origin: "http://0.0.0.0:3000",
+    origin: "http://localhost:3000",
     allowedHosts: true,
+    cors: true,
   },
 });
