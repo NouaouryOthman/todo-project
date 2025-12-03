@@ -4,8 +4,9 @@ import { addTask } from "../../services/task.service";
 export default function TaskForm({ onSubmit }) {
   const [formData, setFormData] = useState({ title: "", description: "" });
 
-  const handleSubmit = () => {
+  const handleSubmit = (event) => {
     const newTask = { ...formData };
+    event.preventDefault();
 
     addTask(newTask).then(({ data }) => onSubmit({ ...data }));
   };
