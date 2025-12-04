@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useDraggable } from "@dnd-kit/core";
 import { deleteTask, updateTask } from "../../services/task.service";
+import toaster from "react-hot-toast";
 
 export default function TaskCard({ task, setTasks, allTasks }) {
   const [isEditing, setIsEditing] = useState(false);
@@ -23,19 +24,31 @@ export default function TaskCard({ task, setTasks, allTasks }) {
     : undefined;
 
   const handleUpdate = () => {
-    updateTask(task.id, { ...task, ...edited }).then(() => {
-      const updated = allTasks.map((t) =>
-        t.id === task.id ? { ...t, ...edited } : t
-      );
-      setTasks(updated);
-      setIsEditing(false);
-    });
+    updateTask(task.id, { ...task, ...edited })
+      .then(() => {
+        const updated = allTasks.map((t) =>
+          t.id === task.id ? { ...t, ...edited } : t
+        );
+        toaster.success("Task updated successfully!");
+        setTasks(updated);
+        setIsEditing(false);
+      })
+      .catch((error) => {
+        console.error(error);
+        toaster.error("Failed to update task.");
+      });
   };
 
   const handleDelete = () => {
-    deleteTask(task.id).then(() => {
-      setTasks((oldTasks) => oldTasks.filter((t) => t.id !== task.id));
-    });
+    deleteTask(task.id)
+      .then(() => {
+        setTasks((oldTasks) => oldTasks.filter((t) => t.id !== task.id));
+        toaster.success("Task deleted successfully!");
+      })
+      .catch((error) => {
+        toaster.error("Failed to delete task.");
+        console.error(error);
+      });
   };
 
   return (
@@ -62,7 +75,6 @@ export default function TaskCard({ task, setTasks, allTasks }) {
             }
           />
           <button
-            onMouseDown={handleUpdate}
             onClick={handleUpdate}
             className="text-green-600 text-sm mr-2"
           >
